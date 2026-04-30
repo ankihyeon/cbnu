@@ -1,0 +1,27 @@
+# 지능화캡스톤프로젝트 #1 — 논문 구현 의존성
+#
+# Python: 3.10.x (Anaconda 권장)
+# CUDA: 12.1 (GPU 학습 시)
+#
+# 설치:
+#   conda create -n crack-quant python=3.10 -y
+#   conda activate crack-quant
+#   pip install torch==2.5.1 torchvision==0.20.1 \
+#       --index-url https://download.pytorch.org/whl/cu121
+#   pip install -r requirements.txt
+
+# Deep Learning (학습 시 PyTorch는 별도 설치 권장)
+ultralytics>=8.4.0          # YOLOv26-seg 지원 필요
+
+# Computer Vision
+opencv-python>=4.10
+scikit-image>=0.25
+
+# 그래프 / 자료구조
+networkx>=3.4
+
+# 수치 계산
+numpy>=1.26
+
+# 설정 파일
+pyyaml>=6.0

@@ -1,0 +1,14 @@
+# YOLOv26-seg 학습용 데이터셋 설정 (서버용)
+# 서버 경로: D:\claude_work\paper_reproduction\data\curated
+# Run: roadlcc-gpu env에서 yolo train data=configs/data_server.yaml model=yolo26n-seg.pt
+
+path: D:/claude_work/paper_reproduction/data/curated
+train: images/train
+val: images/val
+test: images/test
+
+nc: 3
+names:
+  0: Crack_Crazing
+  1: Crack_Longitudinal
+  2: Crack_Transverse

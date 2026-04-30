@@ -1,0 +1,37 @@
+{
+  "source": "D:\\창고\\vscode_AI\\YOLO_data_v3",
+  "destination": "C:\\Users\\Administrator\\Desktop\\충북대\\2026년도 1학기\\지능화 캡스톤 프로젝트\\paper_reproduction\\data\\curated",
+  "total_candidates": 2120,
+  "selected": 1000,
+  "splits": {
+    "train": {
+      "count": 800,
+      "by_class": {
+        "Crack_Crazing": 266,
+        "Crack_Longitudinal": 262,
+        "Crack_Transverse": 272
+      }
+    },
+    "val": {
+      "count": 100,
+      "by_class": {
+        "Crack_Crazing": 37,
+        "Crack_Longitudinal": 38,
+        "Crack_Transverse": 25
+      }
+    },
+    "test": {
+      "count": 100,
+      "by_class": {
+        "Crack_Crazing": 31,
+        "Crack_Longitudinal": 33,
+        "Crack_Transverse": 36
+      }
+    }
+  },
+  "class_names": [
+    "Crack_Crazing",
+    "Crack_Longitudinal",
+    "Crack_Transverse"
+  ]
+}
