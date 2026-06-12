@@ -27,8 +27,15 @@ def main():
     parser.add_argument("--imgsz", type=int, default=640)
     parser.add_argument("--batch", type=int, default=16)
     parser.add_argument("--device", default="0")
+    parser.add_argument("--workers", type=int, default=4,
+                        help="DataLoader workers (저RAM 환경은 2 권장)")
+    parser.add_argument("--cache", default="False",
+                        help="이미지 캐시: False/ram/disk (저RAM은 False)")
     parser.add_argument("--name", default="yolo26n_seg_uiseong")
     args = parser.parse_args()
+
+    cache = {"false": False, "true": True, "ram": "ram", "disk": "disk"}.get(
+        str(args.cache).lower(), False)
 
     from ultralytics import YOLO
 
@@ -54,7 +61,8 @@ def main():
         epochs=args.epochs,
         imgsz=args.imgsz,
         batch=args.batch,
-        workers=4,
+        workers=args.workers,
+        cache=cache,
         device=args.device,
         project=str(runs_dir),
         name=args.name,

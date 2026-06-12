@@ -78,14 +78,37 @@
 
 ---
 
-## 4. smoke test 결과 (예시)
+## 4. 실행 검증 결과
 
-`scripts/smoke_test.py` (test split, GT polygon 기반, 가중치 불필요):
+### 4.1 smoke test (GT 기반, 가중치 불필요)
+
+`scripts/smoke_test.py` (test split, GT polygon):
 
 - 검출 파손 클래스: `pothole`
 - 파손 면적비: 0.0199, 파손 개수: 1, 심각도 가중점수: 0.0499
 
-→ polygon→mask→정량화 파이프라인이 끝까지 정상 동작함을 확인.
+→ polygon→mask→정량화 파이프라인이 끝까지 정상 동작.
+
+### 4.2 저사양 subset 학습 (파이프라인 end-to-end 검증)
+
+전체 데이터셋(24,886장)은 본 로컬(GTX 1050 2GB)에서 학습 불가하므로,
+`scripts/00_curate_subset.py`로 소규모 subset을 추출해 **실제 학습→추론→정량화**까지 검증했다 (`results/training_summary.json`).
+
+| 항목 | 값 |
+|---|---|
+| subset | train 300 / val 60 / test 60 (8클래스 stratified) |
+| 학습 | yolo26n-seg, epochs 20, imgsz 320, batch 2, workers 2, cache off |
+| 환경 | GTX 1050 2GB (CUDA), AMP on, **GPU mem 0.3GB**, 14.5분 |
+| val Box | mAP50 0.123, mAP50-95 0.087 |
+| val Mask | mAP50 0.113, mAP50-95 0.059 |
+| 추론+정량화 | test 60장, conf 0.05 → pothole 검출, 면적비·심각도 산출 정상 |
+
+**해석**: 소규모(300장·20ep·320px)라 mAP·recall이 낮아 검출이 희소하다. 이는 **절대 성능이 아니라 파이프라인 동작 검증** 결과이며, 실성능은 전체 데이터셋·서버(RTX 3090Ti) 학습에서 산출한다.
+
+**저사양 GPU 학습 팁** (본 실행에서 확인):
+- yolo26n은 3.13M params로 매우 작아 imgsz 320·batch 2면 학습 메모리 0.3GB만 사용 → 2GB VRAM에도 충분.
+- 단, GPU 전용 VRAM이 데스크톱 앱들로 1.5GB 점유되어 있어, 공유 메모리 폴백 여유(시스템 RAM)가 필요. RAM 확보(Docker 등 종료)가 도움.
+- `cache=False`, `workers=2`로 RAM 사용 최소화.
 
 ---
 

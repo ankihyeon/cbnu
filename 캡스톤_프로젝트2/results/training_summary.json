@@ -1,0 +1,36 @@
+{
+  "note": "저사양 로컬 환경(GTX 1050 2GB) 소규모 subset 학습 결과 — 파이프라인 end-to-end 검증용. 실성능은 전체 데이터셋 서버 학습 필요.",
+  "model": "yolo26n-seg.pt",
+  "params": 3126280,
+  "dataset": {
+    "source": "D:/YOLO_data_v3 (8 classes)",
+    "subset": {"train": 300, "val": 60, "test": 60},
+    "note": "stratified by primary class; val/test는 원본 풀이 pothole 편중"
+  },
+  "train_config": {
+    "epochs": 20,
+    "imgsz": 320,
+    "batch": 2,
+    "workers": 2,
+    "cache": false,
+    "device": "GTX 1050 (CUDA)",
+    "amp": true,
+    "gpu_mem_used_gb": 0.3,
+    "duration_hours": 0.242
+  },
+  "val_metrics_best": {
+    "box":  {"precision": 0.584, "recall": 0.139, "mAP50": 0.123, "mAP50_95": 0.0868},
+    "mask": {"precision": 0.603, "recall": 0.104, "mAP50": 0.113, "mAP50_95": 0.0589},
+    "n_images": 60,
+    "n_instances": 330
+  },
+  "quantify_demo": {
+    "split": "test",
+    "n_images": 60,
+    "conf_threshold": 0.05,
+    "iou_threshold": 0.5,
+    "images_with_damage": 3,
+    "mean_damage_area_ratio": 0.000186,
+    "comment": "소규모 모델(mAP~0.11) recall이 낮아 검출 희소. 정량화 파이프라인 정상 동작 확인."
+  }
+}

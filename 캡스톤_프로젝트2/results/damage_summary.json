@@ -1,0 +1,9 @@
+{
+  "n_images": 60,
+  "weights": "runs/yolo26n_seg_subset/weights/best.pt",
+  "conf_threshold": 0.05,
+  "iou_threshold": 0.5,
+  "mean_damage_area_ratio": 0.000186,
+  "mean_severity_score": 0.000465,
+  "images_with_damage": 3
+}

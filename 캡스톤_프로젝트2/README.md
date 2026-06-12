@@ -145,9 +145,24 @@ python scripts/02_infer_quantify.py \
 
 8클래스 / train 24,886 · valid 377 · test 186 (Roboflow YOLO seg).
 
-### 파손 정량화 (smoke test)
+### YOLO26n-seg 학습 (저사양 subset, 파이프라인 검증)
 
-GT polygon 기반 검증에서 polygon→mask→정량화 파이프라인 정상 동작 확인 (pothole 검출, 면적비 0.0199, 심각도 0.0499).
+전체 학습은 GPU 서버에서 수행 예정이나, 본 환경(GTX 1050 2GB)에서 **소규모 subset으로 end-to-end 동작을 실제로 검증**하였다 ([results/training_summary.json](results/training_summary.json)).
+
+| 항목 | 값 |
+|---|---|
+| 모델 | `yolo26n-seg.pt` (3.13M params) |
+| subset | train 300 / val 60 / test 60 (8클래스, stratified) |
+| 학습 | epochs 20, imgsz 320, batch 2, GTX 1050 / **14.5분**, GPU mem 0.3GB |
+| val Box | P 0.584 · R 0.139 · **mAP50 0.123** · mAP50-95 0.087 |
+| val Mask | P 0.603 · R 0.104 · **mAP50 0.113** · mAP50-95 0.059 |
+
+> ⚠️ 소규모(300장·20ep·320px)라 mAP가 낮다. **절대 성능이 아닌 파이프라인 검증** 목적이며, 실성능은 전체 데이터셋·서버 학습(`01_train_yolo26n_seg.py`)에서 산출한다. 학습 곡선·혼동행렬은 [results/training_curves.png](results/training_curves.png), [results/confusion_matrix.png](results/confusion_matrix.png).
+
+### 파손 정량화
+
+- **GT 기반(smoke test)**: polygon→mask→정량화 정상 동작 (pothole, 면적비 0.0199, 심각도 0.0499).
+- **학습 모델 기반(추론)**: 위 best.pt로 test 60장 추론 → 정량화 파이프라인 정상 작동 (conf 0.05, pothole 검출 → 면적비·심각도 산출). 결과: [results/per_image_damage.csv](results/per_image_damage.csv), [results/damage_summary.json](results/damage_summary.json).
 
 ---
 
