@@ -1,0 +1,30 @@
+# 지능화캡스톤프로젝트 #2 — 프레임워크(실데이터 보유분) 의존성
+#
+# Python: 3.10~3.11 (Anaconda 권장)
+# CUDA: 12.1 / 11.8 (GPU 학습 시)
+#
+# 설치:
+#   conda create -n road-eval python=3.10 -y
+#   conda activate road-eval
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#   pip install -r requirements.txt
+
+# 파손 탐지·분할
+ultralytics>=8.4.0          # YOLO26-seg 지원 필요
+
+# 컴퓨터 비전 / 정량화
+opencv-python>=4.10
+scikit-image>=0.25
+numpy>=1.26
+
+# 도로 구간 레지스트리 (유성구 도로.xlsx)
+pandas>=2.2
+openpyxl>=3.1
+
+# 설정 파일
+pyyaml>=6.0
+
+# --- 설계 단계 모듈(미구현)에서 사용 예정 ---
+# 상태평가 모델: xgboost>=2.0, lightgbm>=4.0
+# GPS/GIS 매핑: geopandas, shapely, pyproj
+# 검증(ICC/상관): scipy, pingouin

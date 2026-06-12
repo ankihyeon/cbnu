@@ -1,0 +1,17 @@
+# 파손 정량화 파라미터 (src/damage_quantify.py)
+#
+# 클래스별 심각도 가중치(severity)는 손상 점수 산출에 사용된다.
+# 포트홀은 통행 안전 위험이 커 균열보다 높은 가중치를 부여.
+
+min_area: 30           # 이보다 작은 컴포넌트는 잡음으로 제거 (px)
+
+severity:
+  Crack_Crazing: 1.0       # 망상균열
+  Crack_Longitudinal: 0.8  # 종균열
+  Crack_Transverse: 0.8    # 횡균열
+  pothole: 2.5             # 포트홀
+
+# 추론 임계값 (02_infer_quantify.py)
+inference:
+  conf_threshold: 0.4
+  iou_threshold: 0.5

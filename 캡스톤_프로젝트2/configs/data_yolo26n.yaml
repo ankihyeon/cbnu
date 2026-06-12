@@ -1,0 +1,24 @@
+# YOLO26n-seg 학습용 데이터셋 설정 (8 classes)
+# 사용 전 path를 본인 환경의 데이터셋 루트 절대경로로 수정.
+# 예) path: D:/YOLO_data_v3
+#
+# Run:
+#   python scripts/01_train_yolo26n_seg.py --data configs/data_yolo26n.yaml
+
+path: D:/YOLO_data_v3
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 8
+names:
+  0: Crack_Crazing       # 망상균열
+  1: Crack_Longitudinal  # 종균열
+  2: Crack_Transverse    # 횡균열
+  3: human
+  4: manhole
+  5: pothole
+  6: sewer
+  7: vehicle
+
+# 정량화·상태평가에서 파손으로 간주하는 클래스: 0,1,2 (균열) + 5 (포트홀)

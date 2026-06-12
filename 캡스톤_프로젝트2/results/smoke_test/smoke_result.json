@@ -1,0 +1,20 @@
+{
+  "image_h": 1080,
+  "image_w": 1440,
+  "per_class": {
+    "pothole": {
+      "class_id": 5,
+      "class_name": "pothole",
+      "instance_count": 1,
+      "area_px": 31014.0,
+      "area_ratio": 0.01994212962962963,
+      "length_px": 0.0,
+      "mean_width_px": 0.0,
+      "equiv_diameter_px": 198.71650973287635
+    }
+  },
+  "total_damage_area_ratio": 0.01994212962962963,
+  "total_damage_count": 1,
+  "total_crack_length_px": 0.0,
+  "severity_weighted_score": 0.04985532407407407
+}
